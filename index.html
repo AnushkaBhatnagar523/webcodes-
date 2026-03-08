@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person 🌸</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Lock Screen -->
+    <div id="lock-screen">
+        <h2>For Your Eyes Only 🔒</h2>
+        <p style="margin-bottom: 20px;">Please enter the special date to enter ✨</p>
+        <input type="password" id="password" class="pass-input" placeholder="Enter Password">
+        <div id="error-msg" class="error-msg">Incorrect password, try again! 🥺</div>
+        <button id="unlock-btn" class="btn btn-primary">Open My Heart</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="letter-card">
+            <h1>I'm Sorry, Bestie... 🤍</h1>
+            <div class="letter-text">
+                <p>Okay so before you decide to stay mad at me forever, please read this whole message because I really
+                    need to say this properly. I’ve been thinking about what happened and the more I think about it, the
+                    more I understand why you’re upset. You literally left your cricket match and came just to see me,
+                    and I know how much you enjoy watching matches, so the fact that you left that and still came means
+                    you actually made a real effort. When I couldn’t come meet you, it probably felt like your effort
+                    didn’t matter or like I didn’t care enough to come, and that honestly makes me feel really bad
+                    because that’s not what I wanted you to feel at all. The truth is I didn’t avoid meeting you because
+                    I didn’t want to see you — if anything I actually did want to see you — I just couldn’t at that
+                    moment and I hate that it ended up looking like I didn’t care.</p>
+
+                <p>And also… the fact that you left your cricket match for me is actually kind of cute if I’m being
+                    honest. Like imagine someone being so important that a whole cricket match gets sacrificed for them.
+                    That’s some serious dedication and I promise I didn’t take that lightly, even if it looked like I
+                    did in that moment. You doing that actually meant a lot to me, and maybe I didn’t say it then but I
+                    definitely realized it after.</p>
+
+                <p>What’s bothering me the most right now isn’t even just the situation, it’s the fact that you’re mad
+                    at me. Things feel really weird when we’re like this. I’m so used to talking to you normally, joking
+                    with you, telling you random things during the day, annoying you a little, and just being my normal
+                    self with you. When you’re upset with me it suddenly feels like that comfortable space between us
+                    disappears for a while and I genuinely don’t like that feeling. I keep wanting to text you the way I
+                    normally do and then I remember you’re probably still mad at me.</p>
+
+                <p>And the truth is, I miss you being normal with me. I miss you talking to me, teasing me, and being
+                    the version of you that’s nice to me. This angry silent version of you is honestly not my favorite.
+                </p>
+
+                <p>So yes, I’m saying sorry properly. I’m really sorry I couldn’t meet you when you came. I know it
+                    probably felt like you made the effort and I didn’t, and that wasn’t fair to you. If I could redo
+                    that moment, I honestly would. You matter to me way too much for me to be okay with you feeling like
+                    your effort didn’t mean anything.</p>
+
+                <p>But also… you staying mad at me for too long should probably be illegal because I already feel bad
+                    and I also miss you. Life is honestly a little less fun when my favorite person is upset with me. So
+                    how about we make a deal — you forgive me, we stop this little cold war, and next time you come I
+                    will actually come meet you… and as compensation I might even sit and watch a little cricket with
+                    you (which should prove how serious my apology is).</p>
+
+                <p>Now please stop being mad at me and talk to me normally again. I promise I’m much cuter and way more
+                    fun when you forgive me. 🤍</p>
+            </div>
+
+            <div class="buttons">
+                <button id="yes-btn" class="btn btn-primary">I Forgive You ✨</button>
+                <button id="no-btn" class="btn btn-secondary">Still Angry 😤</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="message-card" id="message-card">
+        <h2 style="color: var(--accent-color); margin-bottom: 1rem;">Yay! I Knew It! 🎉</h2>
+        <p>Thank you for being the best friend ever. I promise to make it up to you with unlimited hugs and your
+            favorite snacks! 🍭🍰</p>
+        <button class="btn btn-primary" onclick="closeMessage()">Hehe, okay! ❤️</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
