@@ -423,7 +423,7 @@ p {
     right: 20px;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(5px);
     border-radius: 50%;
     display: flex;
@@ -432,8 +432,8 @@ p {
     cursor: pointer;
     font-size: 1.2rem;
     transition: all 0.3s ease;
-    z-index: 99;
-    opacity: 0.3;
+    z-index: 9999;
+    opacity: 0.6;
 }
 
 .admin-trigger:hover {

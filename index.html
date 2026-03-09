@@ -137,45 +137,47 @@
                     onclick="showMessageBox()">Finish & Talk to Me 🎀</button>
             </div>
         </div>
+    </div>
 
-        <!-- Message Submission Section (For Him) -->
-        <div id="msg-submission-section" class="letter-card" style="display: none;">
-            <h1>Leave a Message 📝</h1>
-            <p>You've seen all my reasons and even caught my forgiveness (hopefully). Now it's your turn. Say anything
-                you want... 🤍</p>
-            <textarea id="user-message" class="msg-input" placeholder="Write your message here..."></textarea>
-            <div class="buttons">
-                <button class="btn btn-primary" onclick="submitMessage()">Send to Bestie ✨</button>
-            </div>
-            <div id="msg-success" class="msg-success" style="display: none;">Message sent! I'll read it soon. 🤍</div>
+    <!-- Admin & Message Sections (Outside main-content for visibility) -->
+    <!-- Message Submission Section (For Him) -->
+    <div id="msg-submission-section" class="letter-card" style="display: none;">
+        <h1>Leave a Message 📝</h1>
+        <p>You've seen all my reasons and even caught my forgiveness. Now it's your turn. Say anything you want... 🤍
+        </p>
+        <textarea id="user-message" class="msg-input" placeholder="Write your message here..."></textarea>
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="submitMessage()">Send to Bestie ✨</button>
+            <button class="btn btn-secondary" onclick="hideAllAndShowMain()">Back</button>
         </div>
+        <div id="msg-success" class="msg-success" style="display: none;">Message sent! I'll read it soon. 🤍</div>
+    </div>
 
-        <!-- Admin Login Section -->
-        <div id="admin-login-section" class="letter-card" style="display: none;">
-            <h1>Admin Access 🔐</h1>
-            <p>Enter the secret admin key to view messages.</p>
-            <input type="password" id="admin-password" class="pass-input" placeholder="Admin Key">
-            <div id="admin-error-msg" class="error-msg">Incorrect key! 🤫</div>
-            <div class="buttons">
-                <button class="btn btn-primary" onclick="checkAdminPassword()">Login</button>
-                <button class="btn btn-secondary" onclick="hideAdmin()">Close</button>
-            </div>
+    <!-- Admin Login Section -->
+    <div id="admin-login-section" class="letter-card" style="display: none;">
+        <h1>Admin Access 🔐</h1>
+        <p>Enter the secret admin key to view messages.</p>
+        <input type="password" id="admin-password" class="pass-input" placeholder="Admin Key">
+        <div id="admin-error-msg" class="error-msg">Incorrect key! 🤫</div>
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="checkAdminPassword()">Login</button>
+            <button class="btn btn-secondary" onclick="hideAdmin()">Close</button>
         </div>
+    </div>
 
-        <!-- Admin Dashboard Section -->
-        <div id="admin-dashboard-section" class="reasons-card" style="display: none;">
-            <div class="reasons-header">
-                <h2>Message Inbox 📩</h2>
-                <p>Messages from your favorite person.</p>
-            </div>
-            <div id="admin-messages-list" class="admin-msg-list">
-                <!-- Messages will be injected here -->
-            </div>
-            <div class="reasons-footer">
-                <button class="btn btn-secondary" onclick="hideAdmin()">Logout</button>
-                <button class="btn btn-secondary" style="background: #ff4d4d; color: white;"
-                    onclick="clearMessages()">Clear All</button>
-            </div>
+    <!-- Admin Dashboard Section -->
+    <div id="admin-dashboard-section" class="reasons-card" style="display: none;">
+        <div class="reasons-header">
+            <h2>Message Inbox 📩</h2>
+            <p>Messages from your favorite person.</p>
+        </div>
+        <div id="admin-messages-list" class="admin-msg-list">
+            <!-- Messages will be injected here -->
+        </div>
+        <div class="reasons-footer">
+            <button class="btn btn-secondary" onclick="hideAdmin()">Logout</button>
+            <button class="btn btn-secondary" style="background: #ff4d4d; color: white;" onclick="clearMessages()">Clear
+                All</button>
         </div>
     </div>
 

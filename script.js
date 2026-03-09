@@ -20,6 +20,7 @@ function checkPassword() {
     if (passwordInput.value === CORRECT_PASSWORD) {
         lockScreen.style.display = 'none';
         mainContent.style.display = 'block';
+        localStorage.setItem('letter_unlocked', 'true');
         createHearts(); // Sprinkle some hearts on entry
     } else {
         errorMsg.style.display = 'block';
@@ -972,15 +973,28 @@ function createHearts() {
 const ADMIN_KEY = "admin123";
 
 function showMessageBox() {
-    document.getElementById('game-section').style.display = 'none';
+    hideAllSections();
     document.getElementById('msg-submission-section').style.display = 'block';
     createHearts();
+}
+
+function hideAllSections() {
+    const ids = ['lock-screen', 'main-content', 'reasons-section', 'happiness-section', 'game-section', 'msg-submission-section', 'admin-login-section', 'admin-dashboard-section'];
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+}
+
+function hideAllAndShowMain() {
+    hideAllSections();
+    document.getElementById('main-content').style.display = 'block';
 }
 
 function submitMessage() {
     const msgInput = document.getElementById('user-message');
     const msg = msgInput.value.trim();
-    const btn = document.querySelector('#msg-submission-section .btn');
+    const btn = document.querySelector('#msg-submission-section .btn-primary');
     const successMsg = document.getElementById('msg-success');
 
     if (!msg) {
@@ -993,10 +1007,8 @@ function submitMessage() {
     btn.disabled = true;
     btn.textContent = "Sending... 💌";
 
-    // 1. Send via Email (Formspree)
-    // Note: On the first submission, Formspree will send you a verification email.
-    // You must click the link in that email to start receiving messages.
-    fetch("https://formspree.io/f/manqkpwz", { // We will use this placeholder, user will see the alert.
+    // 1. Send via Email (FormSubmit.co - reliable and no account needed)
+    fetch("https://formsubmit.co/ajax/anushkabh2426@gmail.com", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -1004,35 +1016,30 @@ function submitMessage() {
         },
         body: JSON.stringify({
             message: msg,
-            sender: "Your Bestie (from birthday website)",
             _subject: "New Message from your Bestie! 🤍",
-            _replyto: "anushkabh2426@gmail.com"
+            _captcha: "false"
         })
     })
-        .then(response => {
-            if (response.ok) {
-                // 2. Save to Local Storage (Backup for Admin Page)
-                const messages = JSON.parse(localStorage.getItem('user_messages') || '[]');
-                messages.push({
-                    text: msg,
-                    date: new Date().toLocaleString(),
-                    id: Date.now()
-                });
-                localStorage.setItem('user_messages', JSON.stringify(messages));
+        .then(response => response.json())
+        .then(data => {
+            // 2. Save to Local Storage
+            const messages = JSON.parse(localStorage.getItem('user_messages') || '[]');
+            messages.push({
+                text: msg,
+                date: new Date().toLocaleString(),
+                id: Date.now()
+            });
+            localStorage.setItem('user_messages', JSON.stringify(messages));
 
-                // UI Success
-                msgInput.value = '';
-                successMsg.style.display = 'block';
-                successMsg.innerHTML = "Message sent to your email! 📩✨";
-                createHearts();
-                alert("Message sent successfully! Check your email (anushkabh2426@gmail.com) shortly. 🤍");
-            } else {
-                throw new Error('Failed to send');
-            }
+            // UI Success
+            msgInput.value = '';
+            successMsg.style.display = 'block';
+            createHearts();
+            alert("Message sent! I'll read it soon. 🤍");
         })
         .catch(error => {
             console.error('Error:', error);
-            alert("Oops! There was a problem sending the email, but I saved it to your Admin Dashboard locally! 🩹");
+            alert("Saved to your local Admin Dashboard! 🩹 (Email might be delayed)");
 
             // Save locally anyway as fallback
             const messages = JSON.parse(localStorage.getItem('user_messages') || '[]');
@@ -1050,13 +1057,7 @@ function submitMessage() {
 }
 
 function showAdminLogin() {
-    // Hide everything else
-    const sections = ['lock-screen', 'main-content', 'reasons-section', 'happiness-section', 'game-section', 'msg-submission-section', 'admin-dashboard-section'];
-    sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-    });
-
+    hideAllSections();
     document.getElementById('admin-login-section').style.display = 'block';
     document.getElementById('admin-password').value = '';
 }
@@ -1064,7 +1065,13 @@ function showAdminLogin() {
 function hideAdmin() {
     document.getElementById('admin-login-section').style.display = 'none';
     document.getElementById('admin-dashboard-section').style.display = 'none';
-    document.getElementById('lock-screen').style.display = 'block';
+
+    // Check if we were already logged in (password check)
+    if (localStorage.getItem('letter_unlocked') === 'true') {
+        document.getElementById('main-content').style.display = 'block';
+    } else {
+        document.getElementById('lock-screen').style.display = 'block';
+    }
 }
 
 function checkAdminPassword() {
