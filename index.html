@@ -76,6 +76,26 @@
                 <button id="no-btn" class="btn btn-secondary">Still Angry 😤</button>
             </div>
         </div>
+
+        <!-- Reasons Counter Section -->
+        <div id="reasons-section" class="reasons-card" style="display: none;">
+            <div class="reasons-header">
+                <h2>Reasons I Like You ❤️</h2>
+                <div class="counter-display">
+                    <span id="reasons-count">0</span>
+                    <p>Reasons so far...</p>
+                </div>
+            </div>
+
+            <div id="reasons-list" class="reasons-list">
+                <!-- Reasons will be injected here -->
+            </div>
+
+            <div class="reasons-footer">
+                <p class="final-message">“One argument doesn’t cancel all these.” 🤍</p>
+                <button class="btn btn-secondary" onclick="backToLetter()">Back to Letter 💌</button>
+            </div>
+        </div>
     </div>
 
     <div class="overlay" id="overlay"></div>
@@ -84,6 +104,8 @@
         <p>Thank you for being the best friend ever. I promise to make it up to you with unlimited hugs and your
             favorite snacks! 🍭🍰</p>
         <button class="btn btn-primary" onclick="closeMessage()">Hehe, okay! ❤️</button>
+        <button class="btn btn-secondary" style="margin-top: 10px;" onclick="showReasons()">See Why You're Amazing
+            ✨</button>
     </div>
 
     <script src="script.js"></script>
