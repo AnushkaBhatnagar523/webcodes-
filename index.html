@@ -94,6 +94,47 @@
             <div class="reasons-footer">
                 <p class="final-message">“One argument doesn’t cancel all these.” 🤍</p>
                 <button class="btn btn-secondary" onclick="backToLetter()">Back to Letter 💌</button>
+                <button class="btn btn-primary" style="margin-top: 10px;" onclick="showHappiness()">Next Page ✨</button>
+            </div>
+        </div>
+
+        <!-- How Happy I Get Section -->
+        <div id="happiness-section" class="letter-card" style="display: none;">
+            <h1>Meeting You = Pure Happiness 🌸</h1>
+            <div class="letter-text">
+                <p>You have no idea how much I actually look forward to seeing you. Even if I don't always say it, the
+                    days we meet are literally the highlights of my week. There’s this specific kind of happiness that I
+                    only feel when we’re hanging out, laughing at things only we find funny, and just being ourselves.
+                </p>
+
+                <p>When I see you, it’s like all my stress just disappears for a while. You have this way of making
+                    everything feel lighter and more fun. Missing out on meeting you isn't just a small thing for me—it
+                    genuinely makes me sad because I was so excited for that 'reset' button that only a bestie hangout
+                    provides.</p>
+
+                <p>So please, don't ever think I don't value our time. I crave it. I get so happy just thinking about
+                    our next plan. You're my favorite person to exist around, and I promise to make our next meeting the
+                    best one yet! 🤍</p>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="showGame()">Ready for a Challenge? 🎮</button>
+            </div>
+        </div>
+
+        <!-- The Game Section -->
+        <div id="game-section" class="reasons-card" style="display: none;">
+            <div class="reasons-header">
+                <h2>Catch My Forgiveness! 🏃‍♂️💨</h2>
+                <p>If you can catch the heart 5 times, you HAVE to forgive me completely! Hehe.</p>
+                <div class="game-score">Score: <span id="game-score">0</span>/5</div>
+            </div>
+
+            <div id="game-area" class="game-area">
+                <div id="game-heart" class="game-heart">❤️</div>
+            </div>
+
+            <div class="reasons-footer">
+                <button class="btn btn-secondary" onclick="backToHappiness()">Back 🌸</button>
             </div>
         </div>
     </div>

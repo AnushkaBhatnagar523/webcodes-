@@ -278,6 +278,68 @@ function backToLetter() {
     letterCard.style.display = 'block';
 }
 
+// Happiness & Game Logic
+function showHappiness() {
+    document.getElementById('reasons-section').style.display = 'none';
+    document.getElementById('happiness-section').style.display = 'block';
+    createHearts();
+}
+
+function backToHappiness() {
+    document.getElementById('game-section').style.display = 'none';
+    document.getElementById('happiness-section').style.display = 'block';
+}
+
+function showGame() {
+    document.getElementById('happiness-section').style.display = 'none';
+    document.getElementById('game-section').style.display = 'flex';
+    resetGame();
+}
+
+let score = 0;
+const gameHeart = document.getElementById('game-heart');
+const scoreDisplay = document.getElementById('game-score');
+const gameArea = document.getElementById('game-area');
+
+gameHeart.addEventListener('click', () => {
+    score++;
+    scoreDisplay.textContent = score;
+    createHearts(); // Bonus hearts on click!
+
+    if (score >= 5) {
+        alert("Yay! You caught my heart! ❤️ Now you HAVE to forgive me and we HAVE to meet soon! No excuses allowed! 😤✨");
+        score = 0;
+        scoreDisplay.textContent = score;
+        backToLetter(); // Go back or to a final celebration? Let's go back to letter for now.
+    } else {
+        moveHeart();
+    }
+});
+
+function moveHeart() {
+    const maxX = gameArea.clientWidth - gameHeart.clientWidth - 20;
+    const maxY = gameArea.clientHeight - gameHeart.clientHeight - 20;
+
+    const x = Math.max(10, Math.random() * maxX);
+    const y = Math.max(10, Math.random() * maxY);
+
+    gameHeart.style.left = `${x}px`;
+    gameHeart.style.top = `${y}px`;
+}
+
+function resetGame() {
+    score = 0;
+    scoreDisplay.textContent = score;
+    moveHeart();
+}
+
+// Auto-move heart if they are too slow (to make it funny)
+setInterval(() => {
+    if (document.getElementById('game-section').style.display === 'flex' && score < 5) {
+        moveHeart();
+    }
+}, 1500);
+
 function createHearts() {
     for (let i = 0; i < 30; i++) {
         const heart = document.createElement('div');
