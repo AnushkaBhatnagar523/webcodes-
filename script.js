@@ -918,9 +918,8 @@ gameHeart.addEventListener('click', () => {
 
     if (score >= 5) {
         alert("Yay! You caught my heart! ❤️ Now you HAVE to forgive me and we HAVE to meet soon! No excuses allowed! 😤✨");
-        score = 0;
-        scoreDisplay.textContent = score;
-        backToLetter(); // Go back or to a final celebration? Let's go back to letter for now.
+        document.getElementById('finish-game-btn').style.display = 'block';
+        scoreDisplay.parentElement.innerHTML = "<b>Challenge Complete! 🎊</b>";
     } else {
         moveHeart();
     }
@@ -966,5 +965,147 @@ function createHearts() {
         setTimeout(() => {
             heart.remove();
         }, 5000);
+    }
+}
+
+// New Admin & Message Logic
+const ADMIN_KEY = "admin123";
+
+function showMessageBox() {
+    document.getElementById('game-section').style.display = 'none';
+    document.getElementById('msg-submission-section').style.display = 'block';
+    createHearts();
+}
+
+function submitMessage() {
+    const msgInput = document.getElementById('user-message');
+    const msg = msgInput.value.trim();
+    const btn = document.querySelector('#msg-submission-section .btn');
+    const successMsg = document.getElementById('msg-success');
+
+    if (!msg) {
+        alert("Please write something! 🥺");
+        return;
+    }
+
+    // Show loading state
+    const originalBtnText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Sending... 💌";
+
+    // 1. Send via Email (Formspree)
+    // Note: On the first submission, Formspree will send you a verification email.
+    // You must click the link in that email to start receiving messages.
+    fetch("https://formspree.io/f/manqkpwz", { // We will use this placeholder, user will see the alert.
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            message: msg,
+            sender: "Your Bestie (from birthday website)",
+            _subject: "New Message from your Bestie! 🤍",
+            _replyto: "anushkabh2426@gmail.com"
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                // 2. Save to Local Storage (Backup for Admin Page)
+                const messages = JSON.parse(localStorage.getItem('user_messages') || '[]');
+                messages.push({
+                    text: msg,
+                    date: new Date().toLocaleString(),
+                    id: Date.now()
+                });
+                localStorage.setItem('user_messages', JSON.stringify(messages));
+
+                // UI Success
+                msgInput.value = '';
+                successMsg.style.display = 'block';
+                successMsg.innerHTML = "Message sent to your email! 📩✨";
+                createHearts();
+                alert("Message sent successfully! Check your email (anushkabh2426@gmail.com) shortly. 🤍");
+            } else {
+                throw new Error('Failed to send');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Oops! There was a problem sending the email, but I saved it to your Admin Dashboard locally! 🩹");
+
+            // Save locally anyway as fallback
+            const messages = JSON.parse(localStorage.getItem('user_messages') || '[]');
+            messages.push({
+                text: msg,
+                date: new Date().toLocaleString(),
+                id: Date.now()
+            });
+            localStorage.setItem('user_messages', JSON.stringify(messages));
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.textContent = originalBtnText;
+        });
+}
+
+function showAdminLogin() {
+    // Hide everything else
+    const sections = ['lock-screen', 'main-content', 'reasons-section', 'happiness-section', 'game-section', 'msg-submission-section', 'admin-dashboard-section'];
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+
+    document.getElementById('admin-login-section').style.display = 'block';
+    document.getElementById('admin-password').value = '';
+}
+
+function hideAdmin() {
+    document.getElementById('admin-login-section').style.display = 'none';
+    document.getElementById('admin-dashboard-section').style.display = 'none';
+    document.getElementById('lock-screen').style.display = 'block';
+}
+
+function checkAdminPassword() {
+    const pass = document.getElementById('admin-password').value;
+    const error = document.getElementById('admin-error-msg');
+
+    if (pass === ADMIN_KEY) {
+        document.getElementById('admin-login-section').style.display = 'none';
+        document.getElementById('admin-dashboard-section').style.display = 'flex';
+        loadMessages();
+    } else {
+        error.style.display = 'block';
+        setTimeout(() => error.style.display = 'none', 2000);
+    }
+}
+
+function loadMessages() {
+    const list = document.getElementById('admin-messages-list');
+    const messages = JSON.parse(localStorage.getItem('user_messages') || '[]');
+
+    list.innerHTML = '';
+
+    if (messages.length === 0) {
+        list.innerHTML = '<p style="text-align: center; color: #888;">No messages yet. 🕊️</p>';
+        return;
+    }
+
+    messages.reverse().forEach(msg => {
+        const item = document.createElement('div');
+        item.className = 'admin-msg-item';
+        item.innerHTML = `
+            <span class="admin-msg-date">${msg.date}</span>
+            <div class="admin-msg-text">${msg.text}</div>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function clearMessages() {
+    if (confirm("Are you sure you want to delete all messages? 🗑️")) {
+        localStorage.removeItem('user_messages');
+        loadMessages();
     }
 }

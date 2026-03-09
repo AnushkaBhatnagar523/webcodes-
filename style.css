@@ -387,6 +387,90 @@ p {
     }
 }
 
+/* Message and Admin Styles */
+.msg-input {
+    width: 100%;
+    min-height: 150px;
+    padding: 1.2rem;
+    border: 2px solid var(--soft-mint);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    outline: none;
+    color: var(--text-color);
+}
+
+.msg-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.1);
+}
+
+.msg-success {
+    margin-top: 1rem;
+    color: #2ecc71;
+    font-weight: 600;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.admin-trigger {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 99;
+    opacity: 0.3;
+}
+
+.admin-trigger:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.admin-msg-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem 0;
+}
+
+.admin-msg-item {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--accent-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.admin-msg-date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.admin-msg-text {
+    color: var(--text-color);
+    line-height: 1.5;
+    word-break: break-word;
+}
+
 /* Reasons Section Styles */
 .reasons-card {
     background: var(--paper-bg);
