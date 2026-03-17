@@ -972,6 +972,12 @@ function createHearts() {
 // New Admin & Message Logic
 const ADMIN_KEY = "admin123";
 
+function showNewLetter() {
+    hideAllSections();
+    document.getElementById('new-letter-section').style.display = 'block';
+    createHearts();
+}
+
 function showMessageBox() {
     hideAllSections();
     document.getElementById('msg-submission-section').style.display = 'block';
@@ -979,7 +985,7 @@ function showMessageBox() {
 }
 
 function hideAllSections() {
-    const ids = ['lock-screen', 'main-content', 'reasons-section', 'happiness-section', 'game-section', 'msg-submission-section', 'admin-login-section', 'admin-dashboard-section'];
+    const ids = ['lock-screen', 'main-content', 'reasons-section', 'happiness-section', 'game-section', 'new-letter-section', 'msg-submission-section', 'admin-login-section', 'admin-dashboard-section'];
     ids.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
